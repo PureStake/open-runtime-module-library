@@ -26,11 +26,11 @@ sp-core = { git = "https://github.com/paritytech/substrate", branch = "polkadot-
 pallet-balances = { git = "https://github.com/paritytech/substrate", branch = "polkadot-v0.9.23" }
 
 # cumulus
-cumulus-primitives-core = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.23" }
-cumulus-pallet-dmp-queue = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.23" }
-cumulus-pallet-xcmp-queue = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.23" }
-cumulus-pallet-xcm = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.23" }
-parachain-info = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.23" }
+cumulus-primitives-core = { git = "https://github.com/purestake/cumulus", branch = "girazoki-investigation" }
+cumulus-pallet-dmp-queue = { git = "https://github.com/purestake/cumulus", branch = "girazoki-investigation" }
+cumulus-pallet-xcmp-queue = { git = "https://github.com/purestake/cumulus", branch = "girazoki-investigation" }
+cumulus-pallet-xcm = { git = "https://github.com/purestake/cumulus", branch = "girazoki-investigation" }
+parachain-info = { git = "https://github.com/purestake/cumulus", branch = "girazoki-investigation" }
 
 # polkadot
 polkadot-parachain = { git = "https://github.com/purestake/polkadot", branch = "moonbeam-polkadot-v0.9.23" }
