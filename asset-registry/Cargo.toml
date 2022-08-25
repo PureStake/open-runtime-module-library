@@ -34,11 +34,11 @@ sp-core = { git = "https://github.com/purestake/substrate", branch = "moonbeam-p
 pallet-balances = { git = "https://github.com/purestake/substrate", branch = "moonbeam-polkadot-v0.9.26" }
 
 # cumulus
-cumulus-primitives-core = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.26" }
-cumulus-pallet-dmp-queue = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.26" }
-cumulus-pallet-xcmp-queue = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.26" }
-cumulus-pallet-xcm = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.26" }
-parachain-info = { git = "https://github.com/purestake/cumulus", branch = "moonbeam-polkadot-v0.9.26" }
+cumulus-primitives-core = { git = "https://github.com/purestake/cumulus", branch = "amar-mock-randomness-in-sproof" }
+cumulus-pallet-dmp-queue = { git = "https://github.com/purestake/cumulus", branch = "amar-mock-randomness-in-sproof" }
+cumulus-pallet-xcmp-queue = { git = "https://github.com/purestake/cumulus", branch = "amar-mock-randomness-in-sproof" }
+cumulus-pallet-xcm = { git = "https://github.com/purestake/cumulus", branch = "amar-mock-randomness-in-sproof" }
+parachain-info = { git = "https://github.com/purestake/cumulus", branch = "amar-mock-randomness-in-sproof" }
 
 # polkadot
 polkadot-parachain = { git = "https://github.com/purestake/polkadot", branch = "moonbeam-polkadot-v0.9.26" }
