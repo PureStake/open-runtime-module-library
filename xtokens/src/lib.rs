@@ -50,6 +50,8 @@ use orml_traits::{
 mod mock;
 mod tests;
 
+pub type OldWeight = u64;
+
 enum TransferKind {
 	/// Transfer self reserve asset.
 	SelfReserveAsset,
@@ -107,7 +109,7 @@ pub mod module {
 		/// The actually weight for an XCM message is `T::BaseXcmWeight +
 		/// T::Weigher::weight(&msg)`.
 		#[pallet::constant]
-		type BaseXcmWeight: Get<Weight>;
+		type BaseXcmWeight: Get<OldWeight>;
 
 		/// Means of inverting a location.
 		type LocationInverter: InvertLocation;
@@ -205,7 +207,7 @@ pub mod module {
 			currency_id: T::CurrencyId,
 			amount: T::Balance,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let dest: MultiLocation = (*dest).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -229,7 +231,7 @@ pub mod module {
 			origin: OriginFor<T>,
 			asset: Box<VersionedMultiAsset>,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let asset: MultiAsset = (*asset).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -265,7 +267,7 @@ pub mod module {
 			amount: T::Balance,
 			fee: T::Balance,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let dest: MultiLocation = (*dest).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -300,7 +302,7 @@ pub mod module {
 			asset: Box<VersionedMultiAsset>,
 			fee: Box<VersionedMultiAsset>,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let asset: MultiAsset = (*asset).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -331,7 +333,7 @@ pub mod module {
 			currencies: Vec<(T::CurrencyId, T::Balance)>,
 			fee_item: u32,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let dest: MultiLocation = (*dest).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -360,7 +362,7 @@ pub mod module {
 			assets: Box<VersionedMultiAssets>,
 			fee_item: u32,
 			dest: Box<VersionedMultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let who = ensure_signed(origin)?;
 			let assets: MultiAssets = (*assets).try_into().map_err(|()| Error::<T>::BadVersion)?;
@@ -379,7 +381,7 @@ pub mod module {
 			currency_id: T::CurrencyId,
 			amount: T::Balance,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let location: MultiLocation =
 				T::CurrencyIdConvert::convert(currency_id).ok_or(Error::<T>::NotCrossChainTransferableCurrency)?;
@@ -400,7 +402,7 @@ pub mod module {
 			amount: T::Balance,
 			fee: T::Balance,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			let location: MultiLocation =
 				T::CurrencyIdConvert::convert(currency_id).ok_or(Error::<T>::NotCrossChainTransferableCurrency)?;
@@ -427,7 +429,7 @@ pub mod module {
 			who: T::AccountId,
 			asset: MultiAsset,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			Self::do_transfer_multiassets(who, vec![asset.clone()].into(), asset, dest, dest_weight)
 		}
@@ -437,7 +439,7 @@ pub mod module {
 			asset: MultiAsset,
 			fee: MultiAsset,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			// Push contains saturated addition, so we should be able to use it safely
 			let mut assets = MultiAssets::new();
@@ -454,7 +456,7 @@ pub mod module {
 			currencies: Vec<(T::CurrencyId, T::Balance)>,
 			fee_item: u32,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			ensure!(
 				currencies.len() <= T::MaxAssetsForTransfer::get(),
@@ -496,7 +498,7 @@ pub mod module {
 			assets: MultiAssets,
 			fee: MultiAsset,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			ensure!(
 				assets.len() <= T::MaxAssetsForTransfer::get(),
@@ -623,7 +625,7 @@ pub mod module {
 			reserve: Option<MultiLocation>,
 			dest: &MultiLocation,
 			maybe_recipient_override: Option<MultiLocation>,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 			use_teleport: bool,
 		) -> DispatchResult {
 			let (transfer_kind, dest, reserve, recipient) = Self::transfer_kind(reserve, dest)?;
@@ -656,7 +658,7 @@ pub mod module {
 			fee: MultiAsset,
 			dest: MultiLocation,
 			recipient: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> Result<Xcm<T::Call>, DispatchError> {
 			Ok(Xcm(vec![TransferReserveAsset {
 				assets: assets.clone(),
@@ -673,7 +675,7 @@ pub mod module {
 			fee: MultiAsset,
 			reserve: MultiLocation,
 			recipient: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> Result<Xcm<T::Call>, DispatchError> {
 			Ok(Xcm(vec![
 				WithdrawAsset(assets.clone()),
@@ -694,7 +696,7 @@ pub mod module {
 			reserve: MultiLocation,
 			dest: MultiLocation,
 			recipient: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 			use_teleport: bool,
 		) -> Result<Xcm<T::Call>, DispatchError> {
 			let mut reanchored_dest = dest.clone();
@@ -763,7 +765,7 @@ pub mod module {
 		fn buy_execution(
 			asset: MultiAsset,
 			at: &MultiLocation,
-			weight: Weight,
+			weight: OldWeight,
 		) -> Result<Instruction<()>, DispatchError> {
 			let ancestry = T::LocationInverter::ancestry();
 			let fees = asset
@@ -815,7 +817,7 @@ pub mod module {
 	// weights
 	impl<T: Config> Pallet<T> {
 		/// Returns weight of `transfer_multiasset` call.
-		fn weight_of_transfer_multiasset(asset: &VersionedMultiAsset, dest: &VersionedMultiLocation) -> Weight {
+		fn weight_of_transfer_multiasset(asset: &VersionedMultiAsset, dest: &VersionedMultiLocation) -> OldWeight {
 			let asset: Result<MultiAsset, _> = asset.clone().try_into();
 			let dest = dest.clone().try_into();
 			if let (Ok(asset), Ok(dest)) = (asset, dest) {
@@ -839,14 +841,15 @@ pub mod module {
 						]),
 					};
 					return T::Weigher::weight(&mut msg)
-						.map_or(Weight::max_value(), |w| T::BaseXcmWeight::get().saturating_add(w));
+						.map_or(OldWeight::max_value(), |w| T::BaseXcmWeight::get().saturating_add(w));
 				}
 			}
 			0
 		}
 
 		/// Returns weight of `transfer` call.
-		fn weight_of_transfer(currency_id: T::CurrencyId, amount: T::Balance, dest: &VersionedMultiLocation) -> Weight {
+		fn weight_of_transfer(currency_id: T::CurrencyId, amount: T::Balance, dest: &VersionedMultiLocation) ->
+			OldWeight {
 			if let Some(location) = T::CurrencyIdConvert::convert(currency_id) {
 				let asset = (location, amount.into()).into();
 				Self::weight_of_transfer_multiasset(&asset, dest)
@@ -860,7 +863,7 @@ pub mod module {
 			currencies: &[(T::CurrencyId, T::Balance)],
 			fee_item: &u32,
 			dest: &VersionedMultiLocation,
-		) -> Weight {
+		) -> OldWeight {
 			let mut assets: Vec<MultiAsset> = Vec::new();
 			for (currency_id, amount) in currencies {
 				if let Some(location) = T::CurrencyIdConvert::convert(currency_id.clone()) {
@@ -879,7 +882,7 @@ pub mod module {
 			assets: &VersionedMultiAssets,
 			fee_item: &u32,
 			dest: &VersionedMultiLocation,
-		) -> Weight {
+		) -> OldWeight {
 			let assets: Result<MultiAssets, ()> = assets.clone().try_into();
 			let dest = dest.clone().try_into();
 			if let (Ok(assets), Ok(dest)) = (assets, dest) {
@@ -902,7 +905,7 @@ pub mod module {
 						]),
 					};
 					return T::Weigher::weight(&mut msg)
-						.map_or(Weight::max_value(), |w| T::BaseXcmWeight::get().saturating_add(w));
+						.map_or(OldWeight::max_value(), |w| T::BaseXcmWeight::get().saturating_add(w));
 				}
 			}
 			0
@@ -931,7 +934,7 @@ pub mod module {
 			currency_id: T::CurrencyId,
 			amount: T::Balance,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			Self::do_transfer(who, currency_id, amount, dest, dest_weight)
 		}
@@ -941,7 +944,7 @@ pub mod module {
 			who: T::AccountId,
 			asset: MultiAsset,
 			dest: MultiLocation,
-			dest_weight: Weight,
+			dest_weight: OldWeight,
 		) -> DispatchResult {
 			Self::do_transfer_multiasset(who, asset, dest, dest_weight)
 		}
