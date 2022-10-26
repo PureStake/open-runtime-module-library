@@ -25,7 +25,7 @@ impl<T: Ord + Encode + Decode + MaxEncodedLen + Clone + Eq + PartialEq, S: Get<u
 		v.sort();
 		v.dedup();
 
-		Self::from_sorted_set(v.try_into().expect("Did not add any values"))
+		Self::from_sorted_set(v.try_into().map_err(|_| ()).expect("Did not add any values"))
 	}
 
 	/// Create a set from a `Vec`.
