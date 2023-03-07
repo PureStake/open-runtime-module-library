@@ -96,12 +96,12 @@ cumulus-pallet-xcm = { git = "https://github.com/purestake//cumulus", rev = "dfe
 parachain-info = { git = "https://github.com/purestake//cumulus", rev = "dfe9427502384e61be9e37714ff4e3a33e23ff67" }
 
 [patch.'https://github.com/purestake/polkadot']
-pallet-xcm = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-polkadot-core-primitives = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-polkadot-runtime-parachains = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-polkadot-parachain = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-polkadot-primitives = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-xcm = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-xcm-executor = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-xcm-builder = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
-xcm-simulator = { git = "https://github.com/purestake//polkadot", rev = "56904b7c28ab0d73b0d68357461a23919cf8690b" }
+pallet-xcm = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+polkadot-core-primitives = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+polkadot-runtime-parachains = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+polkadot-parachain = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+polkadot-primitives = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+xcm = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+xcm-executor = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+xcm-builder = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
+xcm-simulator = { git = "https://github.com/purestake//polkadot", rev = "89dcd36b8a5f072700d8036dd5606f99ad787162" }
