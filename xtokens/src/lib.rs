@@ -674,10 +674,10 @@ pub mod module {
 			// Check dest and reserve, in case dest is AssetHub and reserve is parent, 
 			// we change transfer_kind to "ToReserve".
 			let is_asset_hub_dest = dest.chain_part().unwrap_or(Location::parent()) == Location::new(1, [Parachain(1000)]) || dest == Location::new(1, [Parachain(1001)]);
-			let transfer_kind = if is_asset_hub_dest && reserve == Location::parent() {
-				TransferKind::ToReserve
+			let (transfer_kind, reserve) = if is_asset_hub_dest && reserve == Location::parent() {
+				(TransferKind::ToReserve, dest.chain_part().unwrap_or(Location::parent()))
 			} else {
-				transfer_kind
+				(transfer_kind, reserve)
 			};
 
 			let mut msg = match transfer_kind {
